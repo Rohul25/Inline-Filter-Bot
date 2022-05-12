@@ -10,16 +10,13 @@ from InlineBot.database import present_in_userbase, add_to_userbase
 start_keyboard = [
     [
         InlineKeyboardButton(text = '🤔 Help', callback_data = "help"),
-        InlineKeyboardButton(text = '🤖 About', callback_data = "about")
-    ],
-    [
-        InlineKeyboardButton(text = 'Close 🔒', callback_data = "close")
+        InlineKeyboardButton(text = 'Close 🔐', callback_data = "close")
     ]
 ]
 
 start_keyboard_c = [
     [
-        InlineKeyboardButton(text = '🤖 About', callback_data = "about"),
+        InlineKeyboardButton(text = '🤔 Help', callback_data = "help"),
         InlineKeyboardButton(text = 'Close 🔒', callback_data = "close")
     ],
     [
@@ -32,7 +29,6 @@ help_keyboard = [
         InlineKeyboardButton(text = '✏️ Markdown Helper ✏️', callback_data = 'markdownhelper')
     ],
     [
-        InlineKeyboardButton(text = '🤖 About', callback_data = 'about'),
         InlineKeyboardButton(text = 'Close 🔒', callback_data = 'close')
     ]
 ]
@@ -87,7 +83,7 @@ async def help_msg(client: CodeXBotz, message: Message):
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
 
-@CodeXBotz.on_message(filters.command('about') & filters.private)
+@CodeXBotz.on_message(filters.command('abouts') & filters.private)
 async def about_msg(client: CodeXBotz, message: Message):
     user_id = message.from_user.id
     if user_id in ADMINS:
@@ -119,7 +115,7 @@ async def help_cbq(client: CodeXBotz, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
     
-@CodeXBotz.on_callback_query(filters.regex('^about$'))
+@CodeXBotz.on_callback_query(filters.regex('^abouts$'))
 async def about_cbq(client: CodeXBotz, query: CallbackQuery):
     user_id = query.from_user.id
     if user_id in ADMINS:
